@@ -2,7 +2,7 @@ use std::fs;
 use std::iter::FromIterator;
 
 pub fn get_input() -> Result<Vec<isize>, std::num::ParseIntError> {
-    let input = fs::read_to_string("input/day1.txt").expect("couldn't read input file");
+    let input = fs::read_to_string("input/day01.txt").expect("couldn't read input file");
     return Result::from_iter(input.lines().map(|x| x.parse()));
 }
 
