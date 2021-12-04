@@ -52,30 +52,11 @@ pub fn won(board: &Array2<isize>) -> bool {
         || board.axis_iter(Axis(1)).map(|x| x.sum()).any(|x| x == -5);
 }
 
-pub fn compute_a(numbers: Vec<isize>, mut boards: Vec<Array2<isize>>) -> isize {
-    for num in numbers {
-        for i in 0..boards.len() {
-            boards[i] = scratch_number(&boards[i], num);
-            if won(&boards[i]) {
-                return num
-                    * &boards[i]
-                        .iter()
-                        .fold(0, |acc, e| acc + if *e == -1 { 0 } else { *e });
-            }
-        }
-    }
-
-    return 0;
-}
-
-pub fn compute_b(numbers: Vec<isize>, mut boards: Vec<Array2<isize>>) -> isize {
+pub fn compute_a(numbers: Vec<isize>, mut boards: Vec<Array2<isize>>, return_first_win: bool) -> isize {
     let mut last_score: isize = 0;
 
     for num in numbers {
         for i in 0..boards.len() {
-            if &boards[i].sum() == &0 {
-                continue;
-            }
             boards[i] = scratch_number(&boards[i], num);
             if won(&boards[i]) {
                 last_score = num
@@ -83,6 +64,10 @@ pub fn compute_b(numbers: Vec<isize>, mut boards: Vec<Array2<isize>>) -> isize {
                         .iter()
                         .fold(0, |acc, e| acc + if *e == -1 { 0 } else { *e });
                 boards[i] = &boards[i] * 0;
+
+                if return_first_win {
+                    return last_score;
+                }
             }
         }
     }
@@ -96,13 +81,13 @@ mod test {
 
     #[test]
     fn example_a() {
-        let result = compute_a(get_numbers(), get_boards());
+        let result = compute_a(get_numbers(), get_boards(), true);
         assert_eq!(result, 50008);
     }
 
     #[test]
     fn example_b() {
-        let result = compute_b(get_numbers(), get_boards());
+        let result = compute_a(get_numbers(), get_boards(), false);
         assert_eq!(result, 17408);
     }
 }
