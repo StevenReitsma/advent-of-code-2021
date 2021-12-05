@@ -31,6 +31,11 @@ pub fn points_in_line(line: Line) -> Vec<Point> {
     let mut x = line.0 .0;
     let mut y = line.0 .1;
 
+    let direction = (
+        (line.1 .0 - line.0 .0).clamp(-1, 1),
+        (line.1 .1 - line.0 .1).clamp(-1, 1),
+    );
+
     loop {
         points.push((x, y));
 
@@ -38,23 +43,8 @@ pub fn points_in_line(line: Line) -> Vec<Point> {
             return points;
         }
 
-        // Check if x is increasing or decreasing
-        if line.0 .0 < line.1 .0 {
-            // x is increasing
-            x += 1;
-        } else if line.0 .0 > line.1 .0 {
-            // x is decreasing
-            x -= 1;
-        }
-
-        // Check if y is increasing or decreasing
-        if line.0 .1 < line.1 .1 {
-            // y is increasing
-            y += 1;
-        } else if line.0 .1 > line.1 .1 {
-            // y is decreasing
-            y -= 1;
-        }
+        x += direction.0;
+        y += direction.1;
     }
 }
 
