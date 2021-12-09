@@ -5,6 +5,7 @@ mod day04;
 mod day05;
 mod day06;
 mod day07;
+mod day08;
 
 fn main() {
     println!("This application is supposed to be run as `cargo test`, not `cargo run`.");
