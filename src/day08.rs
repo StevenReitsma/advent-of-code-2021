@@ -88,6 +88,6 @@ mod test {
     #[test]
     fn example_b() {
         let result = compute_b(&get_input());
-        assert_eq!(result, 0);
+        assert_eq!(result, 1063760);
     }
 }
