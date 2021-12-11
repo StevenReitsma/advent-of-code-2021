@@ -81,8 +81,8 @@ mod test {
 
     #[test]
     fn example_a() {
-        let result_naive = compute_a(&get_input());
-        assert_eq!(result_naive, 264);
+        let result = compute_a(&get_input());
+        assert_eq!(result, 264);
     }
 
     #[test]

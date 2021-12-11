@@ -29,8 +29,8 @@ mod test {
 
     #[test]
     fn example_a() {
-        let result_naive = compute_a(&get_input());
-        assert_eq!(result_naive, 337833);
+        let result = compute_a(&get_input());
+        assert_eq!(result, 337833);
     }
 
     #[test]
